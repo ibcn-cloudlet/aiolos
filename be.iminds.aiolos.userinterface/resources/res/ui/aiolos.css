@@ -1,0 +1,42 @@
+/*
+ * CSS of AIOLOS related tabs
+ */
+
+#optionalData {
+	margin: 0;
+	padding: 0;
+}
+
+th.col_Symbolic_Name { width: 9em }
+th.col_Version,
+th.col_Status   { width: 7em }
+th.col_Actions { width: 121px }
+.filterBox      { float: left; margin-left: 1em }
+.symName                 { font-style: italic }
+.symName:before { content: " (" }
+.symName:after   { content: ")"  }
+.filterClear        { display: inline-block; vertical-align: middle }
+.bIcon, .bName   { display: inline-block }
+.bIcon { float: left }
+
+.ui-state-info-text { color: grey; }
+
+#progressbar .ui-progressbar-value {
+    background-color: #ccc;
+    margin: 0px;
+    padding: 0px;
+}
+
+.ui-progressbar .ui-progressbar-overlay {
+	background: url("../images/animated-overlay.gif");
+	height: 100%;
+	filter: alpha(opacity=25);
+	opacity: 0.25;
+}
+
+div.dialog {
+	text-align: center;
+}
+div.dialog p {
+	line-height: 3;
+}

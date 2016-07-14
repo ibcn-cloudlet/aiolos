@@ -1,0 +1,30 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+h2 {
+	color: #4f94d0;
+}
+
+.landing {
+	padding-top: 50px;
+	min-height: 100%;
+}
+
+.main-content {
+	padding-bottom: 20px;
+}
+
+.anchor {
+    padding-top: 60px;
+    margin-top: -60px;
+}
+
+.team {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

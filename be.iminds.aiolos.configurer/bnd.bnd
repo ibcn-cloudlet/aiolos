@@ -1,0 +1,7 @@
+-buildpath: osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834
+	
+Bundle-Activator: be.iminds.aiolos.configurer.Activator
+Bundle-Name: AIOLOS Configurer
+Bundle-Version: 0.6.0
+Private-Package: be.iminds.aiolos.configurer

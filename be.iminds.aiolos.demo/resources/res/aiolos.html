@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AIOLOS Demo</title>
+		<link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<link rel="stylesheet" type="text/css" href="style/ptsans/fonts.css">
+		<link rel="stylesheet" type="text/css" href="style/font-awesome/css/font-awesome.min.css">
+		<link id="size-stylesheet" rel="stylesheet" type="text/css" href="style/narrow.css" />
+		
+		<script type="text/javascript" src="scripts/lib/raphael-min.js"></script>
+    	<script type="text/javascript" src="scripts/lib/dracula_graffle.js"></script>
+    	<script type="text/javascript" src="scripts/lib/dracula_graph.js"></script>
+    	<script type="text/javascript" src="scripts/lib/jquery-1.11.0.min.js"></script>
+    	<script type="text/javascript" src="scripts/lib/jquery-ui-1.10.3.min.js"></script>
+    	<script type="text/javascript" src="scripts/lib/simple-expand.min.js"></script>
+    	<script type="text/javascript" src="scripts/aiolos.js"></script>
+	</head>
+	
+	<body>
+		<div id="header">
+			<img style="float:left" src="images/ugent.png" height="90%" />
+			<!-- <img style="float:center" src="images/logo-transparent.png" height="90%" /> -->
+			<img style="float:right" src="images/iminds.png" height="80%"/>
+			<div id="title"></div>
+		</div>
+		<div id="container">
+			<div id="details" class="column sidebar">
+				<div id="detailcog">
+					<i class="fa fa-cog fa-lg"></i>
+				</div>
+				<div class="head">
+					<h2>Details</h2>
+				</div>
+				<div id="nodeInfo">
+					<div id="detailNode">
+						<i class="fa fa-desktop"></i>
+					</div>
+					<span id="name"></span>
+					<table>
+						<tr>
+							<td class="infoType">ID</td>
+							<td class="infoValue"><span id="nodeId"></span></td>
+						</tr>
+						<tr>
+							<td class="infoType">Arch</td>
+							<td class="infoValue"><span id="arch"></span></td>
+						</tr>
+						<tr>
+							<td class="infoType">OS</td>
+							<td class="infoValue"><span id="os"></span></td>
+						</tr>
+						<tr>
+							<td class="infoType">IP address</td>
+							<td class="infoValue"><span id="ip"></span></td>
+						</tr>
+						<tr>
+							<td class="infoType">#CPU cores</td>
+							<td class="infoValue"><span id="cores"></span></td>
+						</tr>
+						<tr>
+							<td class="infoType">CPU usage</td>
+							<td class="infoValue"><span id="cpu"></span> &#37;</td>
+						</tr>
+						<!-- <tr>
+							<td>Memory usage:</td>
+							<td><span id="memory"></span></td>
+						</tr> -->
+					</table>
+				</div>
+				<div id="componentInfo">
+					<div id="detailComponent">
+						<i class="fa fa-cube"></i>
+					</div>
+					<span id="name"></span>
+					
+					<table class="componentTable">
+						<tr>
+							<td class="infoType">ID</td>
+							<td class="infoValue"><span id="componentId"></span></td>
+						</tr>
+						<tr>
+							<td class="infoType">Version</td>
+							<td class="infoValue"><span id="version"></span></td>
+						</tr>
+						<tr>
+							<td class="infoType">Node</td>
+							<td class="infoValue"><span id="nodeId"></span></td>
+						</tr>
+					</table>
+					<div id="services">
+						<div id="servicesTitle">Services</div>
+	
+						<div id="serviceInfo">
+							
+							<div id="detailService">
+								<i class="fa fa-puzzle-piece"></i>
+							</div>
+							<span id="serviceId"></span>
+							
+							<ul id="methods">
+								<li>
+									<div class="expander">
+										<div id="detailMethod">
+											<i class="fa fa-angle-right"></i>
+										</div>
+										<span id="methodName"></span>
+									</div>
+									<div class="content">
+										<table class="methodTable">
+											<tr>
+												<td class="infoType">Time</td>
+												<td class="infoValue"><span id="time"></span> ms</td>
+											</tr>
+											<tr>
+												<td class="infoType">Arg size</td>
+												<td class="infoValue"><span id="arg"></span> bytes</td>
+											</tr>
+											<tr>
+												<td class="infoType">Ret size</td>
+												<td class="infoValue"><span id="ret"></span> bytes</td>
+											</tr>
+										</table>
+									</div>
+								</li>
+							</ul>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div id="graph" class="column droppable">
+			</div>
+			
+			<div id="repo" class="column sidebar">
+				<div id="repofolder">
+					<i class="fa fa-folder-open fa-lg"></i>
+				</div>
+				<div class="head">
+					<h2>Repository</h2>
+				</div>
+				<ul id="repository">
+					<li>
+						<div id="" class="draggable">
+							<span id="name"></span> <span id="version"></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="footer">
+			<p>Developed by: Tim Verbelen, Steven Bohez, Elias De Coninck - UI Design by: Cedric De Boom - &copy Ghent University, iMinds 2014</p>
+			
+		</div>
+	</body>
+</html> 

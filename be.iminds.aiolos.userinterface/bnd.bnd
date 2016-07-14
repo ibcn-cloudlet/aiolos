@@ -1,0 +1,20 @@
+-buildpath: \
+	osgi.enterprise;version=5.0.0.201203141834,\
+	be.iminds.aiolos.api;version=latest,\
+	osgi.core;version=5.0.0,\
+	org.apache.commons.io,\
+	com.googlecode.json-simple;version=1.1.1,\
+	junit.osgi,\
+	org.apache.felix.http.servlet-api;version=1.0
+Bundle-Activator: be.iminds.aiolos.ui.Activator
+Private-Package: \
+	be.iminds.aiolos.ui,\
+	be.iminds.aiolos.util.log
+Bundle-Name: AIOLOS Web User Interface
+Bundle-Version: 0.6.0
+
+-includeresource: resources/
+Import-Package: \
+	javax.servlet;version='[2.6,4)',\
+	javax.servlet.http;version='[2.6,4)',\
+	*

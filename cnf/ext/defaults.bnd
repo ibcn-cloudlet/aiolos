@@ -1,0 +1,36 @@
+# General Options
+project.dependson       = ${p-dependson;:}
+project.bootclasspath   = ${p-bootclasspath;:}
+project.buildpath       = ${p-buildpath;:}
+project.sourcepath      = ${p-sourcepath;:}
+project.allsourcepath   = ${p-allsourcepath;:}
+project.output          = ${p-output}
+project.testpath        = ${p-testpath;:}
+
+-verbose:     true
+project:      ${basedir}
+src:          src
+bin:          bin
+target-dir:   generated
+target:       ${project}/${target-dir}
+build:        ${workspace}/cnf
+p:            ${basename;${project}}
+project.name: ${p}
+
+# Java Compiler Options
+java:         java
+javac:        javac
+javac.source: 1.6
+javac.target: 1.6
+javac.debug:  on
+
+# Bnd Options
+-sources:       true
+-sourcepath:    ${project}/src
+
+
+Bundle-Copyright: Copyright (C) 2014-2016  iMinds - IBCN - UGent
+Bundle-License: AGPL-3.0 (http://www.gnu.org/licenses/agpl-3.0.txt)
+-includeresource.license: ../LICENSE
+Bundle-DocURL: http://aiolos.intec.ugent.be
+-noee: true

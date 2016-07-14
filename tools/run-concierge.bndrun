@@ -1,0 +1,21 @@
+-runfw: org.eclipse.concierge
+-runee: JavaSE-1.8
+
+-runbundles: \
+	org.apache.felix.gogo.command;version='[0.14.0,0.14.1)',\
+	org.apache.felix.gogo.runtime;version='[0.16.2,0.16.3)',\
+	org.apache.felix.gogo.shell;version='[0.10.0,0.10.1)',\
+	kxml;version='[2.2.2,2.2.3)',\
+	jslp;version='[1.0.0,1.0.1)',\
+	org.objenesis;version='[2.1,2.2)',\
+	com.esotericsoftware.kryo;version='[2.23,2.24)',\
+	de.javakaffee.kryo-serializers;version='[0.23,0.24)',\
+	be.iminds.aiolos.ds;version=latest,\
+	be.iminds.aiolos.repository.api;version=latest,\
+	be.iminds.aiolos.discovery;version=latest,\
+	be.iminds.aiolos.remoteserviceadmin;version=latest,\
+	be.iminds.aiolos.deploymentmanager;version=latest,\
+	be.iminds.aiolos.servicemonitor;version=latest,\
+	be.iminds.aiolos.nodemonitor;version=latest,\
+	be.iminds.aiolos.topologymanager;version=latest,\
+	be.iminds.aiolos.proxymanager;version=latest

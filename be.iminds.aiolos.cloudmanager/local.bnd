@@ -1,0 +1,8 @@
+Bundle-Activator: be.iminds.aiolos.cloud.Activator
+Private-Package: \
+	be.iminds.aiolos.cloud,\
+	be.iminds.aiolos.cloud.local,\
+	be.iminds.aiolos.util.log
+Bundle-Name: AIOLOS Local Cloud Manager
+
+Export-Package: be.iminds.aiolos.cloud.api

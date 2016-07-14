@@ -1,0 +1,9 @@
+-buildpath: \
+	osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	com.esotericsoftware.kryo,\
+	org.eclipse.paho.client.mqttv3;version=1.0,\
+	org.objenesis
+	
+Bundle-Version: 0.6.0
+-sub: *.bnd

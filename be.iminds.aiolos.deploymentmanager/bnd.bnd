@@ -1,0 +1,19 @@
+-buildpath: osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	org.apache.felix.gogo.runtime,\
+	be.iminds.aiolos.api;version=latest,\
+	junit.osgi
+Private-Package: \
+	be.iminds.aiolos.deployment,\
+	be.iminds.aiolos.deployment.command,\
+	be.iminds.aiolos.util.log
+Bundle-Activator: be.iminds.aiolos.deployment.Activator
+Bundle-Name: AIOLOS Deployment Manager
+Import-Package: org.apache.felix.shell;resolution:=optional,\
+ *
+Bundle-Version: 0.6.0
+
+Export-Package: \
+	be.iminds.aiolos.deployment.api,\
+	be.iminds.aiolos.info,\
+	be.iminds.aiolos.resource

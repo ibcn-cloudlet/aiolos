@@ -1,0 +1,25 @@
+-buildpath: be.iminds.aiolos.api;version=latest,\
+	osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	org.apache.felix.gogo.runtime,\
+	junit.osgi
+Bundle-Activator: be.iminds.aiolos.platform.Activator
+Private-Package: \
+	be.iminds.aiolos.platform,\
+	be.iminds.aiolos.platform.command,\
+	be.iminds.aiolos.util.log
+Import-Package: org.apache.felix.shell;resolution:=optional,\
+ *
+Bundle-Name: AIOLOS Platform Manager
+Bundle-Version: 0.6.0
+-noee: true
+
+Export-Package: \
+	be.iminds.aiolos.platform.api,\
+	be.iminds.aiolos.platform.exception,\
+	be.iminds.aiolos.cloud.api,\
+	be.iminds.aiolos.deployment.api,\
+	be.iminds.aiolos.info,\
+	be.iminds.aiolos.monitor.node.api,\
+	be.iminds.aiolos.monitor.service.api,\
+	be.iminds.aiolos.proxy.api

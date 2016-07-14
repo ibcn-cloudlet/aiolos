@@ -1,0 +1,13 @@
+-buildpath: be.iminds.aiolos.api;version=latest,\
+	jslp,\
+	osgi.enterprise;version=5.0,\
+	osgi.core;version=5.0,\
+	junit.osgi
+Bundle-Activator: be.iminds.aiolos.discovery.Activator
+Bundle-Version: 0.6.0
+Private-Package: \
+	be.iminds.aiolos.discovery,\
+	be.iminds.aiolos.discovery.jslp,\
+	be.iminds.aiolos.util.log
+Bundle-Name: AIOLOS Discovery
+

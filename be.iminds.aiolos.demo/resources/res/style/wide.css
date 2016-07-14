@@ -1,0 +1,34 @@
+#header {
+	width: 100%;
+	height: 10%;
+}
+
+#container {
+	width: 100%;
+	height: 85%;
+}
+
+#container .column {
+  	float: left;
+}
+
+#details {
+	width: 20%; 		
+  	height: 100%;
+}
+
+#graph {
+	width: 60%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#repo {
+    width: 20%;      
+    height: 100%;
+}
+
+#footer {
+    width: 100%;
+    height: 5%;
+}

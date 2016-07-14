@@ -1,0 +1,11 @@
+-buildpath:  \
+	osgi.core;version=5.0,\
+	osgi.enterprise;version=5.0,\
+	be.iminds.aiolos.api;version=latest
+	
+Bundle-Version: 0.6.0
+Bundle-Activator: be.iminds.aiolos.launch.Activator
+Private-Package: \
+	be.iminds.aiolos.launch,\
+	be.iminds.aiolos.util.log
+Bundle-Name: AIOLOS Cloud Launcher

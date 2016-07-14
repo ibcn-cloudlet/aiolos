@@ -1,0 +1,18 @@
+-buildpath:  \
+	osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	junit.osgi;version=3.8.2,\
+	org.apache.felix.gogo.runtime,\
+	be.iminds.aiolos.api;version=latest,\
+	com.google.inject;version=latest,\
+	com.google.guava;version='[15.0.0,18.0.0)',\
+	jclouds-compute;version='[1.7.0, 2.0.0)',\
+	jclouds-core;version='[1.7.0, 2.0.0)',\
+	jclouds-scriptbuilder;version='[1.7.0, 2.0.0)',\
+	jclouds-sshj;version='[1.7.0, 2.0.0)',\
+	openstack-nova;version='[1.7.0, 2.0.0)',\
+	aws-ec2;version='[1.7.0, 2.0.0)'
+
+Bundle-Version: 0.6.0
+
+-sub: *.bnd

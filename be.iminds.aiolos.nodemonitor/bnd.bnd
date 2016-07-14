@@ -1,0 +1,11 @@
+-buildpath: be.iminds.aiolos.api;version=latest,\
+	osgi.enterprise;version=5.0.0,\
+	osgi.core;version=5.0.0,\
+	junit.osgi
+Bundle-Activator: be.iminds.aiolos.monitor.node.Activator
+Private-Package: \
+	be.iminds.aiolos.monitor.node,\
+	be.iminds.aiolos.util.log
+Bundle-Name: AIOLOS Node Monitor
+Bundle-Version: 0.6.0
+Export-Package: be.iminds.aiolos.monitor.node.api

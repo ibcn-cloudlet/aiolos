@@ -1,0 +1,74 @@
+<script type="text/javascript" src="${pluginRoot}/res/ui/load_animation.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/ui/components.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+var jsonData = ${__data__};
+var i18n = {
+	statline : '${aiolos.components.statline}'
+};
+// ]]>
+</script>
+
+<!-- status line -->
+<p class="statline">&nbsp;</p>
+
+<!-- top header -->
+<form method="post" action="">
+	<div id="widget-header" class="ui-widget-header ui-corner-top buttonGroup">
+		<button class="refresh" type="button">${aiolos.data.refresh}</button>
+	</div>
+</form>
+	
+<div id="progressbar">
+	<div class="ui-progressbar-value"><div class="ui-progressbar-overlay"></div></div>
+</div>
+
+<table id="plugin_table" class="tablesorter nicetable noauto">
+	<thead>
+		<tr>
+			<th class="col_Id">${id}</th>
+			<th class="col_Component_Name">${aiolos.components.name}</th>
+			<th class="col_Component_Count">${aiolos.components.count}</th>
+			<th class="col_Actions">${aiolos.actions}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><!-- template -->
+			<td>&nbsp;</td><!-- rowId -->
+			<td><!-- Name -->
+				<div class="bIcon ui-icon ui-icon-triangle-1-e" title="Show Details">&nbsp;</div>
+				<div class="bName">&nbsp;</div>
+			</td>
+			<td>&nbsp;</td><!-- count -->
+			<td><!-- actions -->
+				<ul class="icons ui-widget">
+					<li class="dynhover" title="${aiolos.app.scale.tooltip}"><span class="ui-icon">&nbsp;</span></li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- bottom header -->
+<form method="post" action="">
+	<div class="ui-widget-header ui-corner-bottom buttonGroup">
+		<button class="refresh" type="button">${aiolos.data.refresh}</button>
+	</div>
+</form>
+
+<!-- status line -->
+<p class="statline">&nbsp;</p>
+
+<div id="nodeOpError" class="ui-helper-hidden" title="${aiolos.error.title}"><pre>&nbsp;</pre></div>
+
+<!--  Scale dialog -->
+<div id="scaleDialog" class="dialog ui-helper-hidden" title="${aiolos.app.scale.title}">
+	<form method="post" action="${pluginRoot}">
+		<p>${aiolos.app.scale.description}</p>
+		<p>${aiolos.app.scale.number}: <input type="text" name="scaleCount" id="scaleCount" value="1" size="3" /></p>
+		<p><input type="checkbox" name="forceNew" value="forceNew"> ${aiolos.app.scale.forceNew}</p>
+		<input type="hidden" name="action" value="scale" />
+		<input type="hidden" id="component" name="component" value="id" />
+		<input type="hidden" id="version" name="version" value="version" />
+	</form>
+</div>

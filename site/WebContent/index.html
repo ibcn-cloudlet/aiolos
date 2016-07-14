@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AIOLOS</title>
+
+	<link rel="icon" href="images/favicon.ico" />
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Main stylesheet -->
+ 	<link href="css/main.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AIOLOS</a>
+        </div>
+        <div class="navbar-scrollable collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#home">Home</a></li>
+            <li><a href="#aiolos">Learn more</a></li>
+            <li><a href="#tutorial">Getting started</a></li>
+            <li><a href="https://github.com/ibcn-cloudlet/aiolos" target="_blank">Source</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    
+    <div id="home"></div>
+
+    <!-- Main jumbotron -->
+    <div class="landing">
+	    <div class="jumbotron">
+	      <div class="container">
+	      	<div class="row">
+	        	<div class="col-md-4">
+	        	<img src="images/logo.png" class="img-responsive"/>
+	        	</div>
+	        </div>
+	        <img src="images/cloud.png" class="img-responsive"/>
+	        <br/>
+	        <p>AIOLOS is an OSGi-based platform bridging the gap between mobile devices and the Cloud.</p>
+	        <p><a class="btn btn-primary btn-lg" role="button" href="#tutorial">Get started &raquo;</a></p>
+	      </div>
+	    </div>
+	
+	    <div class="container">
+	      <!-- AIOLOS feature highlights -->
+	      <div class="row">
+	        <div class="col-md-4">
+	          <h2>Mobilize the Cloud</h2>
+	          <p>
+	          AIOLOS allows you to transparently deploy software components on your mobile device or in the Cloud.
+	          Components and services are automatically wired together and communicate through high performant remote
+	          procedure call protocols.
+	          </p>
+	        </div>
+	        <div class="col-md-4">
+	          <h2>Fast redeployment</h2>
+	          <p>
+	          Software components can be deployed on any of your connected devices at runtime. Depending on the required
+	          CPU load and the available network connectivity, components can be easily migrated or scaled to meet your
+	          performance requirements.
+	          </p>
+	       </div>
+	        <div class="col-md-4">
+	          <h2>Open source software</h2>
+	          <p>
+	          The AIOLOS framework is available as open source software under AGPLv3 license. We also build on other open source technologies
+	          such as Apache jClouds and Eclipse Concierge. Many of the core AIOLOS components such as the Repository and 
+	          RemoteServiceAdmin also follow the OSGi specifications as provided by the OSGi Alliance. 
+	          </p>
+	        </div>
+	        
+	      </div>
+	    </div>
+	  </div>  
+
+	  <div class="container main-content">
+		  <hr>
+		  
+		  <div id="aiolos" class="anchor"></div>
+		  
+	      <hr>  
+		  
+		  <div id="tutorial" class="anchor"></div>
+	  
+	  	  <hr>
+	  	  
+	  	  <div id="about" class="anchor container">
+	  	  
+	  	  	<h1>About</h1>
+	  	  	
+	  	  	<p>
+	  	  	AIOLOS is a research project running at Ghent University - iMinds. Initially, AIOLOS was developed as a framework for mobile code offloading between a mobile device and a single server,
+	  	    but later evolved to a generic framework for mobile cloud computing.
+	  	  	</p>
+	  	  	
+	  	  	<p>
+	  	  	For more info on AIOLOS and our research:
+	  	  	</p>
+	  	  	
+	  	  	<ul>
+		  	  	<li>
+		  	  	Steven Bohez, Elias De Coninck, Tim Verbelen, Pieter Simoens, Bart Dhoedt, <a href="http://site.uit.no/arm2014/" target="_blank"><i>"Enabling Component-based Mobile Cloud Computing with the AIOLOS Middleware"</i></a>, In proceedings of the 13th Workshop on Adaptive and Reflective Middleware (ARM'14), Bordeaux, France, 2014.
+		  	  	</li>
+		  	  	<li>
+		  	  	Tim Verbelen, Pieter Simoens, Filip De Turck, Bart Dhoedt, <a href="http://www.sciencedirect.com/science/article/pii/S0164121212001641" target="_blank"><i>"AIOLOS: Middleware for improving mobile application performance through cyber foraging"</i></a>, Journal of Systems and Software, Volume 85, Issue 11, pp.2629-2639, November 2012.
+		  	  	</li>
+		  	  	<li>
+		  	  	Tim Verbelen, Pieter Simoens, Filip De Turck, Bart Dhoedt, <a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6648564&isnumber=6648556" target="_blank"><i>"Leveraging Cloudlets for Immersive Collaborative Applications"</i></a>, IEEE Pervasive Computing, Volume 12, Number 4, pp. 30-38, Oct-Dec, 2013.
+		  	  	</li>
+	  	  	</ul>
+	  	  	
+	  	  	<p>
+	  	  	If you use AIOLOS in your research, please cite one of those papers.
+	  	  	</p>
+	  	  	
+	  	  	<h2>Team</h2>
+	  	  	
+	  	  	<p>
+	  	  	AIOLOS is currently developed and maintained by the following team members:
+	  	  	</p>
+	  	  
+	  	  	<div class="row team">
+	  	  		<div class="col-md-2">
+	  	  			<img src="images/Tim_Verbelen.jpg"/>
+	  	  		</div>
+	  	  		<div class="col-md-4">
+	  	  			<p>
+	  	  			<b>Tim Verbelen</b> created the first prototypes of the AIOLOS framework during his Ph.D. at Ghent University - iMinds. He used AIOLOS to optimize runtime deployment of software
+	  	  			components for resource-intensive applications such as augmented reality. 
+	  	  			Tim is also committer of the Eclipse Foundation on the Concierge project, a lightweight OSGi runtime targeted to mobile and embedded devices, and he is an invited researcher of the OSGi Alliance.
+	  	  			</p>
+	  	  		</div>
+	  	  		<div class="col-md-2">
+	  	  			<img src="images/Elias_De_Coninck.jpg"/>
+	  	  		</div>
+	  	  		<div class="col-md-4">
+	  	  			<b>Elias De Coninck</b> is working on a Ph.D. at Ghent University - iMinds on algorithms for optimally scaling application components in hybrid cloud systems.
+	  	  			He is mainly responsible for running AIOLOS in the cloud and the jclouds integration.
+	  	  		</div>
+	  	  	</div>
+	  	  	<div class="row team">
+	  	  		<div class="col-md-2">
+	  	  			<img src="images/Steven_Bohez.jpg"/>
+	  	  		</div>
+	  	  		<div class="col-md-4">
+	  	  			<b>Steven Bohez</b> is working on a Ph.D. at Ghent University - iMinds and is focussing on advanced mobile cloud applications that are distributed between the mobile device and the cloud.
+	  	  			He is currenlty researching optimal deployment and scaling algorithms and using AIOLOS to evaluate and demo his research.
+	  	  		</div>
+	  	  	</div>
+	  	  </div>
+	  	  
+	  	  <hr>
+	  
+	      <footer>
+	        <p>&copy; Ghent University, iMinds</p>
+	      </footer>
+     </div> <!-- /container -->
+
+     
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Showdown Markdown converter --> 
+	<script src="//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+    
+    <script>
+      function showMarkdown(markdown, id){
+    	  markdown = markdown.replace(/\(figures/g,'(doc/figures');
+	      var converter = new Showdown.converter();
+	      var ret = converter.makeHtml(markdown);
+	      document.getElementById(id).innerHTML = ret;
+      }
+    
+	  $.ajax({
+		    url: 'doc/aiolos.md',
+		    type: 'GET',
+		    success: function(markdown) {
+		    	showMarkdown(markdown, 'aiolos');
+		    }
+      });
+		    	
+	  $.ajax({
+		    url: 'doc/tutorial.md',
+		    type: 'GET',
+		    success: function(markdown) {
+		    	showMarkdown(markdown, 'tutorial');
+		    }
+       });
+	  
+	  $('body').scrollspy({ target: '.navbar-scrollable' })
+ 	</script>
+ 	
+ 	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-5683118-5', 'auto');
+	  ga('send', 'pageview');
+	
+	</script>
+  </body>
+</html>
+

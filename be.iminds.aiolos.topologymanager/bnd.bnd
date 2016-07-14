@@ -1,0 +1,19 @@
+Bundle-Activator: be.iminds.aiolos.topology.Activator
+Private-Package: \
+	be.iminds.aiolos.topology,\
+	be.iminds.aiolos.topology.command,\
+	be.iminds.aiolos.util.log
+-buildpath: osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	be.iminds.aiolos.api;version=latest,\
+	junit.osgi,\
+	org.apache.felix.gogo.runtime
+Bundle-Name: AIOLOS Topology Manager
+Bundle-Version: 0.6.0
+
+Export-Package: \
+	be.iminds.aiolos.info,\
+	be.iminds.aiolos.topology.api
+Import-Package: \
+	be.iminds.aiolos.deployment.api;resolution:=optional,\
+	*

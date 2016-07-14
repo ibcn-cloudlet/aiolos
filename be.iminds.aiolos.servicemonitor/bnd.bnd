@@ -1,0 +1,14 @@
+-buildpath: objectprofiler,\
+	osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	be.iminds.aiolos.api;version=latest,\
+	junit.osgi
+Bundle-Activator: be.iminds.aiolos.monitor.component.Activator
+Private-Package: \
+	be.iminds.aiolos.monitor.component,\
+	be.iminds.aiolos.util.log,\
+	com.vladium.utils
+Bundle-Name: AIOLOS Bundle Monitor
+Bundle-Version: 0.6.0
+
+Export-Package: be.iminds.aiolos.monitor.service.api

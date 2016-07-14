@@ -1,0 +1,39 @@
+-buildpath: \
+	org.apache.felix.gogo.runtime,\
+	osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	de.javakaffee.kryo-serializers,\
+	kxml,\
+	com.esotericsoftware.kryo;version=2.23,\
+	org.objenesis;version=2.1,\
+	biz.aQute.junit
+	
+Bundle-Activator: be.iminds.aiolos.rsa.Activator
+Private-Package: be.iminds.aiolos.rsa.command,\
+	be.iminds.aiolos.rsa,\
+	be.iminds.aiolos.rsa.serialization.kryo,\
+	be.iminds.aiolos.rsa.serialization.api,\
+	be.iminds.aiolos.rsa.serialization.java,\
+	be.iminds.aiolos.rsa.exception,\
+	be.iminds.aiolos.rsa.network,\
+	be.iminds.aiolos.rsa.network.api,\
+	be.iminds.aiolos.rsa.network.message,\
+	be.iminds.aiolos.rsa.util
+Bundle-Name: AIOLOS Remote Service Admin
+DynamicImport-Package: *
+Import-Package: \
+	org.apache.felix.shell;resolution:=optional,\
+	com.esotericsoftware.kryo*;resolution:=optional,\
+	de.javakaffee.kryoserializers*;resolution:=optional,\
+	org.objenesis*;resolution:=optional,\
+	org.osgi.service.event;resolution:=optional,\
+	*
+
+Bundle-Version: 0.6.0
+Export-Package: \
+	be.iminds.aiolos.rsa.exception,\
+	org.osgi.service.remoteserviceadmin
+
+-includeresource: LICENSE_note
+
+Provide-Capability: osgi.service;objectClass:List<String>="org.osgi.service.remoteserviceadmin.RemoteServiceAdmin"

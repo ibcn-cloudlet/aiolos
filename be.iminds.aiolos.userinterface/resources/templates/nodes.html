@@ -1,0 +1,99 @@
+<script type="text/javascript" src="${pluginRoot}/res/ui/load_animation.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/ui/nodes.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+var nodesData = ${__data__};
+var drawDetails = ${drawDetails};
+var i18n = {
+	statline : '${aiolos.statline}'
+};
+// ]]>
+</script>
+
+<!-- status line -->
+<p class="statline">&nbsp;</p>
+
+<!-- top header -->
+<form method="post" action="">
+	<div id="widget-header" class="ui-widget-header ui-corner-top buttonGroup">
+		<button class="dynhover startCustom ui-helper-hidden" title="${aiolos.node.custom.tooltip}" id="startCustom" type="button">${aiolos.node.custom}</button>
+		<button class="dynhover refresh" title="${aiolos.data.refresh.tooltip}" id="refresh" type="button">${aiolos.data.refresh}</button>
+	</div>
+</form>
+
+<div id="progressbar">
+	<div class="ui-progressbar-value"><div class="ui-progressbar-overlay"></div></div>
+</div>
+	
+<table id="plugin_table" class="tablesorter nicetable noauto">
+	<thead>
+		<tr>
+			<th class="col_Id">${id}</th>
+			<th class="col_Node_Id">${aiolos.node.id}</th>
+			<th class="col_Node_Id">${aiolos.header.hostname}</th>
+			<th class="col_IPs">${aiolos.header.ips}</th>
+			<th class="col_Status">${aiolos.console}</th>
+			<th class="col_Actions">${aiolos.actions}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><!-- template -->
+			<td>&nbsp;</td><!-- rowId -->
+			<td><!-- ID -->
+				<div class="bIcon ui-icon ui-icon-triangle-1-e" title="Show Details">&nbsp;</div>
+				<div class="bName">&nbsp;</div>
+			</td>
+			<td>&nbsp;</td><!-- Hostname -->
+			<td>&nbsp;</td><!-- IPs -->
+			<td><a class="link" target="_blank">click here</a></td><!-- vm webconsole -->
+			<td><!-- actions -->
+			 <div>
+				<ul class="icons ui-widget">
+					<li class="dynhover" title="${aiolos.node.stop.tooltip}"><span class="ui-icon ui-icon-stop">&nbsp;</span></li>
+					<li class="dynhover" title="${aiolos.component.start.tooltip}"><span class="ui-icon ui-icon-plus">&nbsp;</span></li>
+					<li class="dynhover" title="${aiolos.component.stop.tooltip}"><span class="ui-icon ui-icon-minus">&nbsp;</span></li>
+				</ul>
+			 </div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- bottom header -->
+<form method="post" action="">
+	<div class="ui-widget-header ui-corner-bottom buttonGroup">
+		<button class="dynhover startCustom ui-helper-hidden" title="${aiolos.node.custom.tooltip}" type="button">${aiolos.node.custom}</button>
+		<button class="dynhover refresh" title="${aiolos.data.refresh.tooltip}" type="button">${aiolos.data.refresh}</button>
+	</div>
+</form>
+
+<!-- status line -->
+<p class="statline">&nbsp;</p>
+
+<div id="nodeOpError" class="ui-helper-hidden" title="${aiolos.error.title}"><pre>&nbsp;</pre></div>
+
+<div id="startCustomDialog" class="dialog ui-helper-hidden" title="${aiolos.node.custom.title}">
+	<form method="post" action="${pluginRoot}">
+		<p>${aiolos.node.custom.description}</p>
+		<p><select id="selectbndrun" name="bndrun"></select></p>
+		<input type="hidden" name="action" value="custom" />
+	</form>
+</div>
+
+<div id="startComponentDialog" class="dialog ui-helper-hidden" title="${aiolos.component.start.title}">
+	<form method="post" action="${pluginRoot}">
+		<p>${aiolos.component.start.description}</p>
+		<p><select id="selectcomponent" name="component"></select></p>
+		<input type="hidden" name="action" value="startComponent" />
+		<input type="hidden" id="node_id" name="id" value="id" />
+	</form>
+</div>
+
+<div id="stopComponentDialog" class="dialog ui-helper-hidden" title="${aiolos.component.stop.title}">
+	<form method="post" action="${pluginRoot}">
+		<p>${aiolos.component.stop.description}</p>
+		<p><select id="selectcomponent" name="component"></select></p>
+		<input type="hidden" name="action" value="stopComponent" />
+		<input type="hidden" id="node_id" name="id" value="id" />
+	</form>
+</div>

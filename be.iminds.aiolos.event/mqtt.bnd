@@ -1,0 +1,12 @@
+Bundle-Name: AIOLOS Distributed Events with MQTT
+Bundle-Activator: be.iminds.aiolos.event.broker.mqtt.Activator
+
+Private-Package: \
+	be.iminds.aiolos.event,\
+	be.iminds.aiolos.event.broker,\
+	be.iminds.aiolos.event.broker.mqtt
+
+DynamicImport-Package: *
+	
+Export-Package: be.iminds.aiolos.event.broker.api
+Bundle-Version: 0.6.0

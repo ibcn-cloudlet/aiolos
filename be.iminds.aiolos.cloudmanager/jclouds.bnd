@@ -1,0 +1,7 @@
+Private-Package: \
+	be.iminds.aiolos.cloud,\
+	be.iminds.aiolos.cloud.jclouds,\
+	be.iminds.aiolos.util.log
+Bundle-Activator: be.iminds.aiolos.cloud.Activator
+Bundle-Name: AIOLOS jClouds Cloud Manager
+Export-Package: be.iminds.aiolos.cloud.api

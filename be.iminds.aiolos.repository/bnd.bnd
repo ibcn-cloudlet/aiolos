@@ -1,0 +1,12 @@
+-buildpath: \
+	osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	be.iminds.aiolos.api;version=latest,\
+	kxml,\
+	org.apache.felix.gogo.runtime,\
+	junit.osgi,\
+	org.apache.felix.http.servlet-api;version=1.0
+
+Bundle-Version: 0.6.0
+	
+-sub: *.bnd

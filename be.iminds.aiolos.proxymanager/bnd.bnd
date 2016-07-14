@@ -1,0 +1,20 @@
+-buildpath: osgi.core;version=5.0.0,\
+	osgi.enterprise;version=5.0.0.201203141834,\
+	be.iminds.aiolos.api;version=latest,\
+	org.apache.felix.gogo.runtime,\
+	junit.osgi,\
+	org.mockito.mockito-all
+Bundle-Activator: be.iminds.aiolos.proxy.Activator
+Private-Package: \
+	be.iminds.aiolos.proxy,\
+	be.iminds.aiolos.proxy.command,\
+	be.iminds.aiolos.util.log
+DynamicImport-Package: *
+Bundle-Name: AIOLOS Proxy Manager
+Import-Package: org.apache.felix.shell;resolution:=optional,\
+	*
+Bundle-Version: 0.6.0
+Export-Package: \
+	be.iminds.aiolos.info,\
+	be.iminds.aiolos.proxy.api,\
+	be.iminds.aiolos.proxy.policy

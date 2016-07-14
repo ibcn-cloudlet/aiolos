@@ -1,0 +1,17 @@
+Bundle-Activator: be.iminds.aiolos.repository.Activator
+Private-Package: \
+	be.iminds.aiolos.repository,\
+	be.iminds.aiolos.repository.command,\
+	be.iminds.aiolos.util.log
+Bundle-Name: AIOLOS Repository
+Import-Package: \
+	org.apache.felix.shell;resolution:=optional,\
+	javax.servlet.http;version='[2.6.0,4)',\
+	*
+
+Export-Package: \
+	be.iminds.aiolos.resource,\
+	org.osgi.service.repository
+	
+Provide-Capability: osgi.service;objectClass:List<String>="org.osgi.service.repository.Repository"
+	
