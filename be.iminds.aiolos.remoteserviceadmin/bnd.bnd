@@ -29,7 +29,7 @@ Import-Package: \
 	org.osgi.service.event;resolution:=optional,\
 	*
 
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 Export-Package: \
 	be.iminds.aiolos.rsa.exception,\
 	org.osgi.service.remoteserviceadmin

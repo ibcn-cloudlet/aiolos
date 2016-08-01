@@ -11,7 +11,7 @@ Private-Package: \
 	be.iminds.aiolos.ui,\
 	be.iminds.aiolos.util.log
 Bundle-Name: AIOLOS Web User Interface
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 
 -includeresource: resources/
 Import-Package: \

@@ -7,5 +7,5 @@ Private-Package: \
 	be.iminds.aiolos.monitor.node,\
 	be.iminds.aiolos.util.log
 Bundle-Name: AIOLOS Node Monitor
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 Export-Package: be.iminds.aiolos.monitor.node.api

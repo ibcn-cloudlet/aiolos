@@ -6,7 +6,7 @@
 	com.googlecode.json-simple;version=1.1.1,\
 	junit.osgi,\
 	org.apache.felix.http.servlet-api;version=1.0
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 Bundle-Activator: be.iminds.aiolos.ui.Activator
 Private-Package: \
 	be.iminds.aiolos.ui,\

@@ -4,7 +4,7 @@
 	
 Bundle-Activator: be.iminds.aiolos.ds.Activator
 Bundle-Name: AIOLOS DS
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 
 Private-Package: \
 	be.iminds.aiolos.ds,\

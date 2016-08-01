@@ -9,7 +9,7 @@ Private-Package: \
 	junit.osgi,\
 	org.apache.felix.gogo.runtime
 Bundle-Name: AIOLOS Topology Manager
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 
 Export-Package: \
 	be.iminds.aiolos.info,\

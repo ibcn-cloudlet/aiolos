@@ -3,5 +3,5 @@
 	
 Bundle-Activator: be.iminds.aiolos.configurer.Activator
 Bundle-Name: AIOLOS Configurer
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 Private-Package: be.iminds.aiolos.configurer

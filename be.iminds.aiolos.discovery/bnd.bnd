@@ -4,7 +4,7 @@
 	osgi.core;version=5.0,\
 	junit.osgi
 Bundle-Activator: be.iminds.aiolos.discovery.Activator
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 Private-Package: \
 	be.iminds.aiolos.discovery,\
 	be.iminds.aiolos.discovery.jslp,\

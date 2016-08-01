@@ -7,4 +7,4 @@ Private-Package: \
 	be.iminds.aiolos.event.broker.rs,\
 	be.iminds.aiolos.event.serializer
 Export-Package: be.iminds.aiolos.event.broker.api
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0

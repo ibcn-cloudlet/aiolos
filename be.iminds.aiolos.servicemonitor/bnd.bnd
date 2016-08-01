@@ -9,6 +9,6 @@ Private-Package: \
 	be.iminds.aiolos.util.log,\
 	com.vladium.utils
 Bundle-Name: AIOLOS Bundle Monitor
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 
 Export-Package: be.iminds.aiolos.monitor.service.api

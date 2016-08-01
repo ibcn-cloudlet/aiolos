@@ -11,7 +11,7 @@ Export-Package: be.iminds.aiolos.proxy.api,\
 	be.iminds.aiolos.deployment.api,\
 	be.iminds.aiolos.resource,\
 	be.iminds.aiolos.cloud.api
-Bundle-Version: 0.6.0
+Bundle-Version: 0.7.0
 -buildpath: osgi.enterprise;version=5.0.0.201203141834,\
 	osgi.core;version=5.0.0
 Bundle-Name: AIOLOS API bundle
