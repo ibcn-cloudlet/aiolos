@@ -156,7 +156,8 @@ public class NodeMonitorImpl implements NodeMonitor {
 			Activator.logger.log(LogService.LOG_WARNING, "Error reading cpu monitor information: " + e.getLocalizedMessage());
 		} finally {
 			try {
-				cpuReader.close();
+				if (cpuReader != null)
+					cpuReader.close();
 			} catch (IOException e) {
 			}
 		}
@@ -166,42 +167,43 @@ public class NodeMonitorImpl implements NodeMonitor {
 		BufferedReader memReader = null;
 		
 		try {
-		memReader = new BufferedReader(new FileReader(memFile));
-
-		memory = 0;
-		while ((line = memReader.readLine()) != null) {
-			if (line.startsWith("MemTotal")) {
-				StringTokenizer st = new StringTokenizer(line,
-						" ");
-				st.nextToken();
-				memTotal = Long.parseLong(st.nextToken());
-			} else if (line.startsWith("MemFree")) {
-				StringTokenizer st = new StringTokenizer(line,
-						" ");
-				st.nextToken();
-				memFree = Long.parseLong(st.nextToken());
-			} else if (line.startsWith("Buffers")) {
-				StringTokenizer st = new StringTokenizer(line,
-						" ");
-				st.nextToken();
-				memBuffers = Long.parseLong(st.nextToken());
-			} else if (line.startsWith("Cached")) {
-				StringTokenizer st = new StringTokenizer(line,
-						" ");
-				st.nextToken();
-				memCached = Long.parseLong(st.nextToken());
+			memReader = new BufferedReader(new FileReader(memFile));
+	
+			memory = 0;
+			while ((line = memReader.readLine()) != null) {
+				if (line.startsWith("MemTotal")) {
+					StringTokenizer st = new StringTokenizer(line,
+							" ");
+					st.nextToken();
+					memTotal = Long.parseLong(st.nextToken());
+				} else if (line.startsWith("MemFree")) {
+					StringTokenizer st = new StringTokenizer(line,
+							" ");
+					st.nextToken();
+					memFree = Long.parseLong(st.nextToken());
+				} else if (line.startsWith("Buffers")) {
+					StringTokenizer st = new StringTokenizer(line,
+							" ");
+					st.nextToken();
+					memBuffers = Long.parseLong(st.nextToken());
+				} else if (line.startsWith("Cached")) {
+					StringTokenizer st = new StringTokenizer(line,
+							" ");
+					st.nextToken();
+					memCached = Long.parseLong(st.nextToken());
+				}
 			}
-		}
-
-		memory = 100 * ((double) (memTotal - memFree - memBuffers - memCached))
-				/ memTotal;
-
-		// System.out.println("Memory usage is "+ memory +" %");
+	
+			memory = 100 * ((double) (memTotal - memFree - memBuffers - memCached))
+					/ memTotal;
+	
+			// System.out.println("Memory usage is "+ memory +" %");
 		} catch(IOException e){
 			Activator.logger.log(LogService.LOG_WARNING, "Error reading memory monitor information: " + e.getLocalizedMessage());
 		} finally {
 			try {
-				memReader.close();
+				if (memReader != null)
+					memReader.close();
 			} catch (IOException e) {
 			}
 		}
@@ -246,7 +248,8 @@ public class NodeMonitorImpl implements NodeMonitor {
 			Activator.logger.log(LogService.LOG_WARNING, "Error reading network monitor information: " + e.getLocalizedMessage());
 		} finally {
 			try {
-				networkReader.close();
+				if (networkReader!=null)
+					networkReader.close();
 			} catch (IOException e) {
 			}
 		}
