@@ -80,14 +80,14 @@ public class ServiceAvailableTest extends TestCase {
     }
     
     public void testRepository() throws Exception {
-    	assertBundleAvailable("be.iminds.aiolos.repository");
-    	assertBundleState(Bundle.ACTIVE, "be.iminds.aiolos.repository");
+    	assertBundleAvailable("be.iminds.aiolos.repository.http");
+    	assertBundleState(Bundle.ACTIVE, "be.iminds.aiolos.repository.http");
     	assertServiceAvailable(Repository.class, 5000);
     }
     
     public void testCloudManager() throws Exception {
-    	assertBundleAvailable("be.iminds.aiolos.cloudmanager");
-    	assertBundleState(Bundle.ACTIVE, "be.iminds.aiolos.cloudmanager");
+    	assertBundleAvailable("be.iminds.aiolos.cloudmanager.local");
+    	assertBundleState(Bundle.ACTIVE, "be.iminds.aiolos.cloudmanager.local");
     	assertServiceAvailable(CloudManager.class, 5000);
     }
     
