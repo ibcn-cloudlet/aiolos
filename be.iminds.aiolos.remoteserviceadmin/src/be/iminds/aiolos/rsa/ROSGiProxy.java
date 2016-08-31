@@ -23,6 +23,7 @@
 package be.iminds.aiolos.rsa;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Hashtable;
@@ -34,11 +35,14 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.remoteserviceadmin.EndpointDescription;
 import org.osgi.service.remoteserviceadmin.ImportReference;
+import org.osgi.util.promise.Deferred;
+import org.osgi.util.promise.Promise;
 
 import be.iminds.aiolos.rsa.exception.ROSGiException;
 import be.iminds.aiolos.rsa.network.api.MessageSender;
 import be.iminds.aiolos.rsa.network.api.NetworkChannel;
 import be.iminds.aiolos.rsa.network.api.NetworkChannelFactory;
+import be.iminds.aiolos.rsa.network.message.InterruptMessage;
 import be.iminds.aiolos.rsa.network.message.RemoteCallMessage;
 import be.iminds.aiolos.rsa.network.message.RemoteCallResultMessage;
 import be.iminds.aiolos.rsa.util.MethodSignature;
@@ -114,12 +118,38 @@ public class ROSGiProxy implements InvocationHandler, ImportReference{
 		
 		try {
 			// send the message and get a RemoteCallResultMessage in return
-			RemoteCallResultMessage resultMsg = (RemoteCallResultMessage) sender.sendAndWaitMessage(invokeMsg, channel);
-			if (resultMsg.causedException()) {
-				throw resultMsg.getException();
+			if(method.getReturnType().equals(Promise.class)){
+				// return a Promise immediately
+				final Deferred<Object> d = new Deferred<>();
+				sender.sendAndWaitMessage(invokeMsg, channel).then(
+					p -> {
+						RemoteCallResultMessage resultMsg = (RemoteCallResultMessage) p.getValue();
+						if(resultMsg.causedException()){
+							d.fail(resultMsg.getException());
+						} 
+						d.resolve(resultMsg.getResult());
+						return null;
+					}, p -> {
+						d.fail(new ServiceException("Error in remote method call "+method.getName()+" of "+endpointDescription.getId(), ServiceException.REMOTE, p.getFailure()));
+					}
+				);
+				return d.getPromise();
+			} else {
+				// wait until the return message is here
+				try {
+					RemoteCallResultMessage resultMsg = (RemoteCallResultMessage) sender.sendAndWaitMessage(invokeMsg, channel).getValue();
+					if (resultMsg.causedException()) {
+						throw resultMsg.getException();
+					}
+					Object result = resultMsg.getResult();
+					return result;
+				} catch(InterruptedException e){
+					sender.sendMessage(new InterruptMessage(invokeMsg.getXID()), channel);
+					throw e;
+				} catch(InvocationTargetException e){
+					throw new ROSGiException("Remote call failed ", e);
+				}
 			}
-			Object result = resultMsg.getResult();
-			return result;
 			
 		} catch (ROSGiException e) {
 			// Throw exception to the application... remote call failed!

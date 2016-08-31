@@ -6,7 +6,8 @@
 	kxml,\
 	com.esotericsoftware.kryo;version=2.23,\
 	org.objenesis;version=2.1,\
-	biz.aQute.junit
+	biz.aQute.junit,\
+	osgi.promise
 	
 Bundle-Activator: be.iminds.aiolos.rsa.Activator
 Private-Package: be.iminds.aiolos.rsa.command,\

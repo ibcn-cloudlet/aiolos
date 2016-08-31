@@ -22,6 +22,8 @@
  *******************************************************************************/
 package be.iminds.aiolos.rsa.network.api;
 
+import org.osgi.util.promise.Promise;
+
 import be.iminds.aiolos.rsa.exception.ROSGiException;
 import be.iminds.aiolos.rsa.network.message.ROSGiMessage;
 
@@ -33,5 +35,5 @@ public interface MessageSender {
 
 	public void sendMessage(ROSGiMessage msg, NetworkChannel channel) throws ROSGiException;
 	
-	public ROSGiMessage sendAndWaitMessage(ROSGiMessage msg, NetworkChannel channel) throws ROSGiException, InterruptedException;
+	public Promise<ROSGiMessage> sendAndWaitMessage(ROSGiMessage msg, NetworkChannel channel) throws ROSGiException, InterruptedException;
 }

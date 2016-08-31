@@ -26,11 +26,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.NetworkInterface;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -60,6 +58,8 @@ import org.osgi.service.remoteserviceadmin.RemoteConstants;
 import org.osgi.service.remoteserviceadmin.RemoteServiceAdmin;
 import org.osgi.service.remoteserviceadmin.RemoteServiceAdminEvent;
 import org.osgi.service.remoteserviceadmin.RemoteServiceAdminListener;
+import org.osgi.util.promise.Deferred;
+import org.osgi.util.promise.Promise;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
@@ -74,7 +74,6 @@ import be.iminds.aiolos.rsa.network.api.NetworkChannel;
 import be.iminds.aiolos.rsa.network.api.NetworkChannelFactory;
 import be.iminds.aiolos.rsa.network.message.EndpointDescriptionMessage;
 import be.iminds.aiolos.rsa.network.message.EndpointRequestMessage;
-import be.iminds.aiolos.rsa.network.message.InterruptMessage;
 import be.iminds.aiolos.rsa.network.message.ROSGiMessage;
 import be.iminds.aiolos.rsa.network.message.RemoteCallMessage;
 import be.iminds.aiolos.rsa.network.message.RemoteCallResultMessage;
@@ -391,8 +390,8 @@ public class ROSGiServiceAdmin implements RemoteServiceAdmin, MessageReceiver, M
 		EndpointRequestMessage requestMsg = new EndpointRequestMessage(endpointId, interfaces);
 		EndpointDescriptionMessage edMsg = null;
 		try {
-			edMsg = (EndpointDescriptionMessage) sendAndWaitMessage(requestMsg, channel);
-		} catch (InterruptedException e) {}
+			edMsg = (EndpointDescriptionMessage) sendAndWaitMessage(requestMsg, channel).getValue();
+		} catch (Exception e) {}
 		if(edMsg == null || edMsg.getEndpointDescription()==null){
 			throw new ROSGiException("No valid endpoint exists!");
 		}
@@ -746,42 +745,21 @@ public class ROSGiServiceAdmin implements RemoteServiceAdmin, MessageReceiver, M
 	/*
 	 * Send the ROSGiMessage over the NetworkChannel and wait (blocking) for reply
 	 */
-	public ROSGiMessage sendAndWaitMessage(final ROSGiMessage msg, NetworkChannel networkChannel) throws ROSGiException, InterruptedException {
+	public Promise<ROSGiMessage> sendAndWaitMessage(final ROSGiMessage msg, NetworkChannel networkChannel) throws ROSGiException, InterruptedException {
 		if (msg.getXID() == 0) {
 			msg.setXID(nextXid());
 		}
 		Integer xid = new Integer(msg.getXID());
 		
-		WaitingCallback blocking = new WaitingCallback(networkChannel);
+		WaitingCallback callback = new WaitingCallback(networkChannel);
 
 		synchronized (callbacks) {
-			callbacks.put(xid, blocking);
+			callbacks.put(xid, callback);
 		}
 
 		sendMessage(msg, networkChannel);
 
-		// wait for the reply
-		synchronized (blocking) {
-			ROSGiMessage result = blocking.getResult();
-			try {
-				if (result == null) {
-					blocking.wait(Config.TIMEOUT);
-					result = blocking.getResult();
-				}
-			} catch (InterruptedException ie) {
-				// interrupt the remote call, also remove callback
-				callbacks.remove(xid);
-				sendMessage(new InterruptMessage(xid), networkChannel);
-				throw ie;
-			}
-			if (result != null) {
-				return result;
-			} else {
-				// TODO should we immediately dispose the channel here?
-				//disposeChannel(networkChannel);
-				throw new ROSGiException("No (valid) message returned");
-			}
-		}
+		return callback.getResult();
 	}
 	
 	/*
@@ -789,20 +767,28 @@ public class ROSGiServiceAdmin implements RemoteServiceAdmin, MessageReceiver, M
 	 */
 	class WaitingCallback {
 
-		private ROSGiMessage result;
+		private final Deferred<ROSGiMessage> result;
 		private final NetworkChannel channel;
 		
 		public WaitingCallback(NetworkChannel channel){
 			this.channel = channel;
+			this.result = new Deferred<>();
 		}
 		
-		public synchronized void result(ROSGiMessage msg) {
-			result = msg;
-			this.notifyAll();
+		public void result(ROSGiMessage msg) {
+			try {
+				if(msg == null){
+					result.fail(new ROSGiException("Channel closed"));
+				}
+				
+				result.resolve(msg);
+			} catch(IllegalStateException e){
+				// should we do something here or ok to just ignore?
+			}
 		}
 
-		synchronized ROSGiMessage getResult() {
-			return result;
+		Promise<ROSGiMessage> getResult() {
+			return result.getPromise();
 		}
 		
 		// used to break callback when channel closed
@@ -865,6 +851,16 @@ public class ROSGiServiceAdmin implements RemoteServiceAdmin, MessageReceiver, M
 					try {
 						Object result = method.invoke(endpoint.getServiceObject(),
 								arguments);
+						
+						if(result instanceof Promise){
+							Promise p = (Promise) result;
+							try {
+								result = p.getValue();
+							} catch(InvocationTargetException e){
+								result = e.getCause();
+							}
+						}
+						
 						final RemoteCallResultMessage m = new RemoteCallResultMessage(result);
 						m.setXID(invMsg.getXID());
 						
@@ -939,6 +935,9 @@ public class ROSGiServiceAdmin implements RemoteServiceAdmin, MessageReceiver, M
 				if(task!=null){
 					task.cancel();
 				}
+				RemoteCallResultMessage m = new RemoteCallResultMessage(new InterruptedException());
+				m.setXID(msg.getXID());
+				return m;
 			default:
 				//Unimplemented message type
 				return null;
