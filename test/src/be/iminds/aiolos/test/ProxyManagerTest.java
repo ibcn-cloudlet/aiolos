@@ -89,6 +89,8 @@ public class ProxyManagerTest  extends TestCase {
 		
 		ServiceReference[] refs = context.getAllServiceReferences("org.example.api.Greeting", null);
 		assertEquals(1, refs.length);
+		
+		dm.stopComponent(component);
 	}
 	
 	public void testCallbackServiceProxy() throws Exception {

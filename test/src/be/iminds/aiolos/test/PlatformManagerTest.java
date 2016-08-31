@@ -27,14 +27,13 @@ import static org.knowhowlab.osgi.testing.assertions.ServiceAssert.assertService
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import junit.framework.TestCase;
-
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.repository.Repository;
 
+import be.iminds.aiolos.cloud.api.CloudManager;
 import be.iminds.aiolos.deployment.api.DeploymentManager;
 import be.iminds.aiolos.info.ComponentInfo;
 import be.iminds.aiolos.info.NodeInfo;
@@ -45,6 +44,7 @@ import be.iminds.aiolos.platform.api.PlatformManager;
 import be.iminds.aiolos.proxy.api.ProxyInfo;
 import be.iminds.aiolos.proxy.api.ProxyManager;
 import be.iminds.aiolos.proxy.api.ProxyPolicy;
+import junit.framework.TestCase;
 
 public class PlatformManagerTest extends TestCase {
 
@@ -52,8 +52,10 @@ public class PlatformManagerTest extends TestCase {
 	
 	private PlatformManager pm;
 	
-	public void setUp(){
+	public void setUp() throws Exception{
 		assertServiceAvailable(Repository.class, 5000);
+
+		assertServiceAvailable(CloudManager.class, 5000);
 		
 		ServiceReference ref = context.getServiceReference(PlatformManager.class);
 		assertNotNull(ref);
@@ -150,6 +152,7 @@ public class PlatformManagerTest extends TestCase {
 	}
 	
 	public void testProxies() throws Exception {
+		
 		NodeInfo node1 = pm.startNode();
 		
 		assertEquals(0, pm.getComponents(node1.getNodeId()).size());

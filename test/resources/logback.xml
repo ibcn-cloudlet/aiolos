@@ -13,7 +13,7 @@
 	</root>
 	
 	<logger name="be.iminds.aiolos">
-	    <level value="INFO" />
+	    <level value="ERROR" />
 	</logger>
 
 	<logger name="net.schmizz">

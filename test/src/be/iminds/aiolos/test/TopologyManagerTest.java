@@ -23,7 +23,6 @@
 package be.iminds.aiolos.test;
 
 import static org.knowhowlab.osgi.testing.assertions.ServiceAssert.assertServiceAvailable;
-import junit.framework.TestCase;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
@@ -31,10 +30,12 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.repository.Repository;
 
+import be.iminds.aiolos.cloud.api.CloudManager;
 import be.iminds.aiolos.info.ComponentInfo;
 import be.iminds.aiolos.info.NodeInfo;
 import be.iminds.aiolos.platform.api.PlatformManager;
 import be.iminds.aiolos.proxy.api.ProxyInfo;
+import junit.framework.TestCase;
 
 public class TopologyManagerTest extends TestCase {
 
@@ -44,6 +45,7 @@ public class TopologyManagerTest extends TestCase {
 	
 	public void setUp(){
 		assertServiceAvailable(Repository.class, 5000);
+		assertServiceAvailable(CloudManager.class, 5000);
 		
 		ServiceReference ref = context.getServiceReference(PlatformManager.class);
 		assertNotNull(ref);
@@ -55,21 +57,20 @@ public class TopologyManagerTest extends TestCase {
 	public void testTopologyFindAvailable() throws Exception {
 		NodeInfo node1 = pm.startNode();
 		
-		ComponentInfo hello = pm.startComponent("org.example.impls.hello", "2.0.0", node1.getNodeId());
+		ComponentInfo test = pm.startComponent("org.test.impl", "1.0.0", node1.getNodeId());
 		
 		Thread.sleep(1000);
 		
 		// should not be imported yet
 		assertEquals(0, pm.getProxies(context.getProperty(Constants.FRAMEWORK_UUID)).size());
 		
-		ComponentInfo cmd = pm.startComponent("org.example.impls.command", "2.0.0", context.getProperty(Constants.FRAMEWORK_UUID));
+		context.getServiceReference("org.test.api.Test");
 		
 		Thread.sleep(1000);
 		
 		// should be imported now
 		assertEquals(1, pm.getProxies(context.getProperty(Constants.FRAMEWORK_UUID)).size());
 		
-		pm.stopComponent(cmd);
 		pm.stopNode(node1.getNodeId());
 		
 		Thread.sleep(1000);
