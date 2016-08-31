@@ -45,6 +45,7 @@ import org.osgi.framework.Version;
 import org.osgi.framework.hooks.service.EventListenerHook;
 import org.osgi.framework.hooks.service.FindHook;
 import org.osgi.framework.hooks.service.ListenerHook.ListenerInfo;
+import org.osgi.service.log.LogService;
 import org.osgi.service.remoteserviceadmin.RemoteConstants;
 
 import be.iminds.aiolos.info.ComponentInfo;
@@ -345,6 +346,7 @@ public class ProxyManagerImpl implements FindHook, EventListenerHook, ProxyManag
 						// succesfully proxied ... hide event for listeners
 						listeners.clear();
 					} catch(Exception e){
+						Activator.logger.log(LogService.LOG_WARNING, "Failed to create proxy for "+componentId+" "+serviceId, e);
 						// proxying failed ...
 						p.remove(serviceId);
 					}
