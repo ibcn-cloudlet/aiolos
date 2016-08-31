@@ -446,7 +446,12 @@ public class ServiceProxy implements InvocationHandler {
 	
 	private boolean isUsedLocally(){
 		boolean usedLocally = false;
-		for(Bundle b : proxyRegistration.getReference().getUsingBundles()){
+		
+		Bundle[] usingBundles = proxyRegistration.getReference().getUsingBundles();
+		if(usingBundles == null)
+			return false;
+		
+		for(Bundle b : usingBundles){
 			// ignore proxymanager or remoteserviceadmin bundles
 			boolean ignore = false;
 			if(b.getRegisteredServices()!=null){
