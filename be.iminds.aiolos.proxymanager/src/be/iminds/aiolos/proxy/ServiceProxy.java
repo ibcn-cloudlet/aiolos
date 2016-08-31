@@ -230,7 +230,7 @@ public class ServiceProxy implements InvocationHandler {
 
 			// register proxy service object if not yet done
 			if(proxyRegistration==null){
-				registerProxyService();
+				registerProxyService(object);
 			}
 
 		} catch(Exception e){
@@ -371,19 +371,33 @@ public class ServiceProxy implements InvocationHandler {
 		}
 	}
 	
-	private void registerProxyService() throws ClassNotFoundException {
+	private void registerProxyService(Object o) throws ClassNotFoundException {
 		Class[] clazzes = new Class[serviceInterfaces.size()];
 		int i =0;
 		boolean isInterface = true;
 		for(String serviceInterface : serviceInterfaces){
-			clazzes[i] = context.getBundle().loadClass(serviceInterface);
-			if(!clazzes[i].isInterface())
-				isInterface = false;
+			for(Class c : o.getClass().getInterfaces()){
+				if(c.getName().equals(serviceInterface)){
+					clazzes[i] = c;
+					break;
+				}
+			}
+			
+			if(clazzes[i] == null){
+				for(Class c : o.getClass().getInterfaces()){
+					if(c.getName().equals(serviceInterface)){
+						isInterface = false;
+						clazzes[i] = c;
+						break;
+					}
+				}
+			}
+			
 			i++;
 		}
 		Object monitorProxy;
 		if(isInterface){
-			monitorProxy = Proxy.newProxyInstance(this.getClass().getClassLoader(), clazzes, this);
+			monitorProxy = Proxy.newProxyInstance(o.getClass().getClassLoader(), clazzes, this);
 		} else {
 			// just reregister the object in case no service interface?
 			// work around for e.g. allowing Fragment service on Android

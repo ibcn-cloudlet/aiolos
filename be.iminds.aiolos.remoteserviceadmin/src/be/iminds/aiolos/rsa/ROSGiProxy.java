@@ -28,11 +28,16 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.framework.Version;
+import org.osgi.framework.wiring.BundleCapability;
+import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.remoteserviceadmin.EndpointDescription;
 import org.osgi.service.remoteserviceadmin.ImportReference;
 import org.osgi.util.promise.Deferred;
@@ -71,7 +76,7 @@ public class ROSGiProxy implements InvocationHandler, ImportReference{
 		this.sender = sender;
 	}
 	
-	public static ROSGiProxy createServiceProxy(BundleContext context, ClassLoader loader, EndpointDescription endpointDescription, NetworkChannelFactory channelFactory, MessageSender sender) throws ROSGiException{
+	public static ROSGiProxy createServiceProxy(BundleContext context, EndpointDescription endpointDescription, NetworkChannelFactory channelFactory, MessageSender sender) throws ROSGiException{
 		String endpointId = endpointDescription.getId();
 		List<String> interfaces = endpointDescription.getInterfaces();
 
@@ -90,15 +95,32 @@ public class ROSGiProxy implements InvocationHandler, ImportReference{
 			String[] clazzNames = new String[interfaces.size()];
 			for(int i=0;i<interfaces.size();i++){
 				clazzNames[i] = interfaces.get(i);
-				clazzes[i] = loader.loadClass(interfaces.get(i));
+				String pkg = clazzNames[i].substring(0, clazzNames[i].lastIndexOf("."));
+				clazzes[i] = loadClass(context, interfaces.get(i), pkg, endpointDescription.getPackageVersion(pkg));
 			}
-			Object proxy = Proxy.newProxyInstance(loader, clazzes, p);
+			Object proxy = Proxy.newProxyInstance(ROSGiProxy.class.getClassLoader(), clazzes, p);
 			Hashtable<String, Object> properties = p.buildServiceProperties();
 			p.registration = context.registerService(clazzNames, proxy, properties);
 		} catch (ClassNotFoundException e) {
 			throw new ROSGiException("Error loading class of service proxy", e);
 		}
 		return p;
+	}
+	
+	private static Class loadClass(BundleContext ctx, String className, String pkg, Version pkgVersion) throws ClassNotFoundException {
+		for(Bundle b : ctx.getBundles()){
+			BundleWiring bw = b.adapt(BundleWiring.class);
+			for(BundleCapability cap : bw.getCapabilities("osgi.wiring.package")){
+				Map<String, Object> attrs = cap.getAttributes();
+				if(attrs.get("osgi.wiring.package").equals(pkg)){
+					if(attrs.get("version").equals(pkgVersion)){
+						return b.loadClass(className);
+					}
+				}
+			}
+		}
+		
+		return ROSGiProxy.class.getClassLoader().loadClass(className);
 	}
 	
 	@Override

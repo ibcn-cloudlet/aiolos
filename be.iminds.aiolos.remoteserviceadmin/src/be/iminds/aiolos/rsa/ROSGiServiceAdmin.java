@@ -348,7 +348,6 @@ public class ROSGiServiceAdmin implements RemoteServiceAdmin, MessageReceiver, M
 				ROSGiProxy proxy = proxies.get(endpointId);
 				if(proxy==null){
 					proxy = ROSGiProxy.createServiceProxy(context, 
-							this.getClass().getClassLoader(), 
 							endpointDescription, 
 							channelFactory, 
 							this);
