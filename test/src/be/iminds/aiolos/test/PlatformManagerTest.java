@@ -32,6 +32,7 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.repository.Repository;
+import org.osgi.util.promise.Promise;
 
 import be.iminds.aiolos.cloud.api.CloudManager;
 import be.iminds.aiolos.deployment.api.DeploymentManager;
@@ -44,6 +45,7 @@ import be.iminds.aiolos.platform.api.PlatformManager;
 import be.iminds.aiolos.proxy.api.ProxyInfo;
 import be.iminds.aiolos.proxy.api.ProxyManager;
 import be.iminds.aiolos.proxy.api.ProxyPolicy;
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 public class PlatformManagerTest extends TestCase {
@@ -215,6 +217,54 @@ public class PlatformManagerTest extends TestCase {
 		pm.stopNode(node2.getNodeId());
 		Thread.sleep(1000);
 	}
+	
+	public void testPromise() throws Exception {
+		
+		NodeInfo node1 = pm.startNode();
+		
+		assertEquals(0, pm.getComponents(node1.getNodeId()).size());
+		
+		pm.startComponent("org.example.promise.impl", "1.0.0", node1.getNodeId());
+		
+		assertEquals(2, pm.getComponents(node1.getNodeId()).size());
+		
+		// need to fetch service once, as with the lazy service import topologymanager
+		// only after the first getServiceReference the service will be imported
+		ServiceReference ref = context.getServiceReference("org.example.promise.api.Greeting");
+		Thread.sleep(1000);
+		
+		// now there should be one proxy on this node
+		assertEquals(1, pm.getProxies(context.getProperty(Constants.FRAMEWORK_UUID)).size());
+		
+		final boolean[] called = new boolean[1];
+		called[0] = false;
+		
+		// perform a method call
+		ref = context.getServiceReference("org.example.promise.api.Greeting");
+		if(ref!=null){
+			Object o = context.getService(ref);
+			for(Method m : o.getClass().getMethods()){
+				if(m.getName().equals("greet") && m.getParameterTypes()[0].equals(String.class)){
+					Promise result = (Promise)m.invoke(o, "test");
+					result.then(p -> {
+						System.out.println(p.getValue());
+						called[0] = true;
+						return null;
+					});
+				}
+			}
+		}
+		
+		Assert.assertFalse(called[0]);
+		
+		Thread.sleep(1500);
+		
+		Assert.assertTrue(called[0]);
+		
+		pm.stopNode(node1.getNodeId());
+		Thread.sleep(1000);
+	}
+	
 	
     private class TestProxyPolicy implements ProxyPolicy {
 		boolean called = false;

@@ -49,13 +49,15 @@ Private-Package: be.iminds.aiolos.test
 -runee: JavaSE-1.6
 -runvm: -ea
 -runfw: org.apache.felix.framework;version='[4.2.1,4.2.1]'
--buildpath: junit.osgi,\
+-buildpath: \
+	junit.osgi,\
 	org.mockito.mockito-all,\
 	osgi.enterprise,\
 	osgi.core;version=5.0,\
 	be.iminds.aiolos.api;version=latest,\
 	org.knowhowlab.osgi.testing.assertions,\
-	org.knowhowlab.osgi.testing.utils
+	org.knowhowlab.osgi.testing.utils,\
+	osgi.promise
 -runsystempackages: sun.reflect
 -runproperties: org.apache.felix.log.storeDebug=true,\
 	felix.fileinstall.dir=resources,\
