@@ -34,8 +34,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.ws.Endpoint;
-
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.Filter;
@@ -57,10 +55,10 @@ import be.iminds.aiolos.info.NodeInfo;
 import be.iminds.aiolos.topology.api.TopologyManager;
 
 /**
- * An {@link EndpointListener} that listens to {@link Endpoint}s exported
+ * An {@link EndpointListener} that listens to Endpoints exported
  * by the {@link RemoteServiceAdmin}, and shares those with other {@link EndpointListener}s.
  * 
- * When remote {@link Endpoint}s are discovered, those are imported on the local
+ * When remote Endpoints are discovered, those are imported on the local
  * OSGi runtime if possible.
  * 
  * This allows for multiple OSGi runtimes to be connected and to see remote services
