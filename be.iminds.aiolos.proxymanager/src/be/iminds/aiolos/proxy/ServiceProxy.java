@@ -233,35 +233,34 @@ public class ServiceProxy implements InvocationHandler {
 				registerProxyService(object);
 			}
 
+			// this is a local service instance, hence export this service!
+			if(instance.getNodeId().equals(context.getProperty(Constants.FRAMEWORK_UUID))){
+				exportProxyService();
+				// set property that there is a local reference
+				// can be used to only use service when a local
+				// instance is available
+				serviceProperties.put("aiolos.proxy.local", "true");
+			}
+			
+			// create String[] instanceIds
+			if(instances.size()>1){
+				String[] instanceIds = new String[instances.size()];
+				int k = 0;
+				for(ServiceInfo i : instances.keySet()){
+					instanceIds[k++] = i.getNodeId();
+				}
+				serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instanceIds);
+			} else {
+				serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instances.keySet().iterator().next().getNodeId());
+			}
+			proxyRegistration.setProperties(serviceProperties);
+			
 		} catch(Exception e){
 			Activator.logger.log(LogService.LOG_DEBUG, "Error adding proxy instance of "+componentId+" "+serviceId+" : "+e.getMessage());
 			throw new Exception("Error adding proxy instance of "+componentId+" "+serviceId, e);
 		} finally {
 			write.unlock();
 		}
-		
-		// this is a local service instance, hence export this service!
-		if(instance.getNodeId().equals(context.getProperty(Constants.FRAMEWORK_UUID))){
-			exportProxyService();
-			// set property that there is a local reference
-			// can be used to only use service when a local
-			// instance is available
-			serviceProperties.put("aiolos.proxy.local", "true");
-		}
-		
-		// TODO should we create String[] instanceIds within the lock?
-		if(instances.size()>1){
-			String[] instanceIds = new String[instances.size()];
-			int k = 0;
-			for(ServiceInfo i : instances.keySet()){
-				instanceIds[k++] = i.getNodeId();
-			}
-			serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instanceIds);
-		} else {
-			serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instances.keySet().iterator().next().getNodeId());
-		}
-		proxyRegistration.setProperties(serviceProperties);
-
 		
 		checkPolicy();
 	}
@@ -279,9 +278,7 @@ public class ServiceProxy implements InvocationHandler {
 			unexportProxyService();
 			// service properties cannot be removed, so set aiolos.proxy.local to false
 			serviceProperties.put("aiolos.proxy.local", "false");
-			
-			// will be updated later on when not disposed
-			//proxyRegistration.setProperties(serviceProperties);
+			// service properties be updated later on when not disposed
 		}
 		
 		try {
@@ -295,27 +292,23 @@ public class ServiceProxy implements InvocationHandler {
 					proxyRegistration = null;
 				}
 				dispose = true;
+			} else {
+				if(instances.size()>1){
+					String[] instanceIds = new String[instances.size()];
+					int k = 0;
+					for(ServiceInfo i : instances.keySet()){
+						instanceIds[k++] = i.getNodeId();
+					}
+					serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instanceIds);
+				} else {
+					serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instances.keySet().iterator().next().getNodeId());
+				}
+				proxyRegistration.setProperties(serviceProperties);
 			}
 		} catch(Exception e){
 			Activator.logger.log(LogService.LOG_DEBUG, "Error removing proxy instance of "+componentId+" "+serviceId, e);
 		} finally {
 			write.unlock();
-		}
-		
-		// TODO should we create String[] instanceIds within the lock?
-		if(!dispose){
-			// update aiolos.framework.id ids
-			if(instances.size()>1){
-				String[] instanceIds = new String[instances.size()];
-				int k = 0;
-				for(ServiceInfo i : instances.keySet()){
-					instanceIds[k++] = i.getNodeId();
-				}
-				serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instanceIds);
-			} else {
-				serviceProperties.put(ProxyManagerImpl.FRAMEWORK_UUID, instances.keySet().iterator().next().getNodeId());
-			}
-			proxyRegistration.setProperties(serviceProperties);
 		}
 		
 		checkPolicy();
