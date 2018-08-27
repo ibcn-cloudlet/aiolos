@@ -7,7 +7,7 @@
 	com.esotericsoftware.kryo;version=2.23,\
 	org.objenesis;version=2.1,\
 	biz.aQute.junit,\
-	osgi.promise
+	org.osgi.util.promise;version=1.1
 	
 Bundle-Activator: be.iminds.aiolos.rsa.Activator
 Private-Package: be.iminds.aiolos.rsa.command,\

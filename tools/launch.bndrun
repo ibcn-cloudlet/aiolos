@@ -6,7 +6,8 @@ jclouds.version='[1.8.0,1.9.0)'
 
 -resolve.effective: active
 -runbundles:  \
-	osgi.promise;version='[6.0.0,7.0.0)',\
+	org.osgi.util.function;version='[1.1,1.2)',\
+	org.osgi.util.promise;version='[1.1,1.2)',\
 	ch.qos.logback.classic;version='[1.0.13,1.0.14)',\
 	ch.qos.logback.core;version='[1.0.13,1.0.14)',\
 	slf4j.api;version='[1.7.2,1.7.3)',\

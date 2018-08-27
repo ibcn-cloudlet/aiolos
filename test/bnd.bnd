@@ -1,7 +1,8 @@
 Test-Cases: ${classes;CONCRETE;EXTENDS;junit.framework.TestCase}
 
 -runbundles:\
-	osgi.promise;version='[6.0.0,7.0.0)',\
+	org.osgi.util.function;version='[1.1,1.2)',\
+	org.osgi.util.promise;version='[1.1,1.2)',\
 	biz.aQute.junit,\
 	org.mockito.mockito-all,\
 	org.knowhowlab.osgi.testing.assertions,\
@@ -57,7 +58,7 @@ Private-Package: be.iminds.aiolos.test
 	be.iminds.aiolos.api;version=latest,\
 	org.knowhowlab.osgi.testing.assertions,\
 	org.knowhowlab.osgi.testing.utils,\
-	osgi.promise
+	org.osgi.util.promise
 -runsystempackages: sun.reflect
 -runproperties: org.apache.felix.log.storeDebug=true,\
 	felix.fileinstall.dir=resources,\
