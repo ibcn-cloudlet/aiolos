@@ -180,6 +180,8 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void stop(final BundleContext context) throws Exception {
+		context.removeBundleListener(topologyManager);
+		
 		topologyManager.cleanup();
 		
 		topologyManagerTracker.close();
