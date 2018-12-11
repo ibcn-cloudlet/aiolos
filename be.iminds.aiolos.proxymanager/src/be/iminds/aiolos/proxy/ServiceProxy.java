@@ -365,27 +365,16 @@ public class ServiceProxy implements InvocationHandler {
 	}
 	
 	private void registerProxyService(Object o) throws ClassNotFoundException {
-		Class[] clazzes = new Class[serviceInterfaces.size()];
+		Class<?>[] clazzes = new Class[serviceInterfaces.size()];
 		int i =0;
 		boolean isInterface = true;
+		// load with the ClassLoader of the service object ... should work
+		ClassLoader loader = o.getClass().getClassLoader();
 		for(String serviceInterface : serviceInterfaces){
-			for(Class c : o.getClass().getInterfaces()){
-				if(c.getName().equals(serviceInterface)){
-					clazzes[i] = c;
-					break;
-				}
+			clazzes[i] = loader.loadClass(serviceInterface);
+			if(!clazzes[i].isInterface()) {
+				isInterface = false;
 			}
-			
-			if(clazzes[i] == null){
-				for(Class c : o.getClass().getInterfaces()){
-					if(c.getName().equals(serviceInterface)){
-						isInterface = false;
-						clazzes[i] = c;
-						break;
-					}
-				}
-			}
-			
 			i++;
 		}
 		Object monitorProxy;
